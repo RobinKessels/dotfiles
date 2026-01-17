@@ -1,0 +1,278 @@
+# ============================================================
+# Local config (NOT in git)
+# ============================================================
+[[ -f "$HOME/.config/zsh/.zshrc.local" ]] && source "$HOME/.config/zsh/.zshrc.local"
+
+
+# ============================================================
+# Oh My Zsh
+# ============================================================
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="robbyrussell"
+
+plugins=(
+  git
+  zsh-shift-select
+)
+
+source "$ZSH/oh-my-zsh.sh"
+
+
+# ============================================================
+# Locale
+# ============================================================
+export LANG="en_US.UTF-8"
+export LANGUAGE="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+
+
+# ============================================================
+# PATH + toolchain environment
+# ============================================================
+# Java
+export JAVA_HOME="$(
+  /usr/libexec/java_home -v 17 2>/dev/null
+)"
+
+# Flutter (you had two different paths; keeping both as-is)
+export PATH="$HOME/development/flutter/bin:$PATH"
+export PATH="$PATH:$HOME/flutter/bin"
+
+# pyenv shims
+PATH="$(pyenv root)/shims:$PATH"
+
+# Postgres (libpq)
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+
+# ============================================================
+# Aliases
+# ============================================================
+alias ctx="kubie ctx"
+
+# Sentigrate / Wolk
+alias wolkdeploy="cd ~/Sentigrate/wolk/wolk-deployments/deployment-config"
+alias wolkapp="cd ~/Sentigrate/wolk/wolk-app"
+alias harvest-ot="python /Users/robin/Sentigrate/harvest/harvest_timelogs.py"
+
+# Misc
+alias non="cat ~/.non-commands.txt"
+alias pip="pip3"
+alias tf="terraform"
+alias dm="osascript -e 'tell app \"System Events\" to tell appearance preferences to set dark mode to not dark mode'"
+
+# K8s
+alias k="kubectl"
+
+# Convenience
+alias aero="nvim ~/.config/aerospace/aerospace.toml"
+
+
+# ============================================================
+# Google Cloud SDK (if installed)
+# ============================================================
+if [[ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]]; then
+  source "$HOME/google-cloud-sdk/path.zsh.inc"
+fi
+
+if [[ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]]; then
+  source "$HOME/google-cloud-sdk/completion.zsh.inc"
+fi
+
+
+# ============================================================
+# Completions
+# ============================================================
+autoload -U +X bashcompinit && bashcompinit
+
+# terraform completion (Homebrew path)
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
+# kubectl completion
+if (( $+commands[kubectl] )); then
+  source <(kubectl completion zsh)
+  complete -o default -F __start_kubectl k
+fi
+
+
+# ============================================================
+# Helpers
+# ============================================================
+venv() {
+  python -m venv "$1" && source "$1/bin/activate"
+}
+
+
+# ============================================================
+# Ghostty keybindings + selection / clipboard widgets
+# ============================================================
+# WARNING: ghostty doesn't yet support advanced key binding selections.
+# https://github.com/ghostty-org/ghostty/discussions/3142
+#
+# Workaround based on:
+# https://stackoverflow.com/questions/5407916/zsh-zle-shift-selection
+#
+# | BINDING                  | ACTION                 | SUPPORTED | WORK-AROUND
+# | Cmd + x                  | Cut selection          | ❌        | Fn + Ctrl + x
+# | Cmd + c                  | Copy selection         | ✅        |
+# | Cmd + v                  | Paste selection        | ✅        |
+# | Shift + LeftArrow        | Select left character  | ✅        |
+# | Shift + RightArrow       | Select right character | ✅        |
+# | Shift + Opt + LeftArrow  | Select word to left    | ✅        |
+# | Shift + Opt + RightArrow | Select word to right   | ✅        |
+# | Cmd + Shift + LeftArrow  | Select to line start   | ✅        |
+# | Cmd + Shift + RightArrow | Select to line end     | ✅        |
+# | Cmd + LeftArrow          | Move to line start     | ✅        |
+# | Cmd + RightArrow         | Move to line end       | ✅        |
+# | Opt + LeftArrow          | Move word to left      | ✅        |
+# | Opt + RightArrow         | Move word to right     | ✅        |
+# | Opt + Backspace          | Delete word to left    | ✅        |
+# | Opt + Fn + Backspace     | Delete word to right   | ❌        | Fn + Ctrl + Backspace
+
+export KEY_BACKSPACE='^?'
+export KEY_CMD_C='^[[27;6;67~'
+export KEY_CMD_LEFT='^A'
+export KEY_CMD_RIGHT='^E'
+export KEY_DELETE='^[[3~'
+export KEY_FN_CTRL_X='^X'
+export KEY_LEFT='^[[D'
+export KEY_RIGHT='^[[C'
+export KEY_SHIFT_CMD_LEFT='^[[1;10D'
+export KEY_SHIFT_CMD_RIGHT='^[[1;10C'
+export KEY_SHIFT_LEFT='^[[1;2D'
+export KEY_SHIFT_OPT_LEFT='^[[1;4D'
+export KEY_SHIFT_OPT_RIGHT='^[[1;4C'
+export KEY_SHIFT_RIGHT='^[[1;2C'
+
+# --- Widgets -------------------------------------------------
+
+# copy selected terminal text to clipboard
+zle -N widget::copy-selection
+function widget::copy-selection {
+  if (( REGION_ACTIVE )); then
+    zle copy-region-as-kill
+    printf "%s" "$CUTBUFFER" | pbcopy
+  fi
+}
+
+# cut selected terminal text to clipboard
+zle -N widget::cut-selection
+function widget::cut-selection {
+  if (( REGION_ACTIVE )); then
+    zle kill-region
+    printf "%s" "$CUTBUFFER" | pbcopy
+  fi
+}
+
+# paste clipboard contents
+zle -N widget::paste
+function widget::paste {
+  (( REGION_ACTIVE )) && zle kill-region
+  RBUFFER="$(wl-paste)${RBUFFER}"
+  CURSOR=$(( CURSOR + $(echo -n "$(pbpaste)" | wc -m | bc) ))
+}
+
+# select entire prompt
+zle -N widget::select-all
+function widget::select-all {
+  local buflen
+  buflen=$(echo -n "$BUFFER" | wc -m | bc)
+  CURSOR=$buflen
+  zle set-mark-command
+  while [[ $CURSOR > 0 ]]; do
+    zle beginning-of-line
+  done
+}
+
+# scrolls the screen up, in effect clearing it
+zle -N widget::scroll-and-clear-screen
+function widget::scroll-and-clear-screen {
+  printf "\n%.0s" {1..$LINES}
+  zle clear-screen
+}
+
+function widget::util-select() {
+  (( REGION_ACTIVE )) || zle set-mark-command
+  local widget_name=$1
+  shift
+  zle $widget_name -- "$@"
+  zle copy-region-as-kill
+  printf "%s" "$CUTBUFFER" | pbcopy
+}
+
+function widget::util-unselect() {
+  REGION_ACTIVE=0
+  local widget_name=$1
+  shift
+  zle $widget_name -- "$@"
+}
+
+function widget::util-delselect() {
+  if (( REGION_ACTIVE )); then
+    zle kill-region
+  else
+    local widget_name=$1
+    shift
+    zle $widget_name -- "$@"
+  fi
+}
+
+function widget::util-insertchar() {
+  (( REGION_ACTIVE )) && zle kill-region
+  RBUFFER="${1}${RBUFFER}"
+  zle forward-char
+}
+
+bindkey "$KEY_CMD_C" widget::copy-selection
+bindkey "$KEY_FN_CTRL_X" widget::cut-selection
+
+# NOTE: "keyname" column is arbitrarily descriptive.
+for keyname           kcap   seq                   mode       widget (
+  left              kcub1  $KEY_LEFT             unselect   backward-char
+  right             kcuf1  $KEY_RIGHT            unselect   forward-char
+
+  del               x      $KEY_DELETE           delselect  delete-char
+  backspace         x      $KEY_BACKSPACE        delselect  backward-delete-char
+
+  cmd-left          x      $KEY_CMD_RIGHT        unselect   end-of-line
+  cmd-right         x      $KEY_CMD_LEFT         unselect   beginning-of-line
+  shift-cmd-left    x      $KEY_SHIFT_CMD_LEFT   select     beginning-of-line
+  shift-cmd-right   x      $KEY_SHIFT_CMD_RIGHT  select     end-of-line
+  shift-ctrl-left   x      $KEY_SHIFT_OPT_LEFT   select     backward-word
+  shift-ctrl-right  x      $KEY_SHIFT_OPT_RIGHT  select     forward-word
+  shift-left        kLFT   $KEY_SHIFT_LEFT       select     backward-char
+  shift-right       kRIT   $KEY_SHIFT_RIGHT      select     forward-char
+) {
+  eval "function widget::key-$keyname() {
+    widget::util-$mode $widget \$@
+  }"
+  zle -N widget::key-$keyname
+  bindkey "$seq" widget::key-$keyname
+}
+
+# Fix autosuggest completion being overridden by keybindings:
+export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(
+  widget::key-right
+  widget::key-shift-right
+  widget::key-cmd-right
+  widget::key-shift-cmd-right
+)
+
+
+# ============================================================
+# Lazy-load nvm
+# ============================================================
+export NVM_DIR="$HOME/.nvm"
+
+_nvm_lazy_load() {
+  unset -f nvm node npm npx yarn pnpm
+  [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
+  [[ -s "$NVM_DIR/bash_completion" ]] && source "$NVM_DIR/bash_completion"
+}
+
+nvm()  { _nvm_lazy_load; nvm  "$@"; }
+node() { _nvm_lazy_load; node "$@"; }
+npm()  { _nvm_lazy_load; npm  "$@"; }
+npx()  { _nvm_lazy_load; npx  "$@"; }
+yarn() { _nvm_lazy_load; yarn "$@"; }
+pnpm() { _nvm_lazy_load; pnpm "$@"; }
