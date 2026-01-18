@@ -52,3 +52,5 @@ keybind = global:option+grave_accent=toggle_quick_terminal
 keybind = opt+h=unbind
 keybind = opt+l=unbind
 
+# set opacity
+background-opacity = 0.9
