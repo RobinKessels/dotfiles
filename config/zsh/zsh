@@ -70,6 +70,7 @@ alias k="kubectl"
 
 # Convenience
 alias aero="nvim ~/.config/aerospace/aerospace.toml"
+alias p="python3"
 
 
 # ============================================================
