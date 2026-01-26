@@ -39,10 +39,14 @@ export PATH="$HOME/development/flutter/bin:$PATH"
 export PATH="$PATH:$HOME/flutter/bin"
 
 # pyenv shims
-PATH="$(pyenv root)/shims:$PATH"
+if command -v pyenv &> /dev/null; then
+  export PATH="$(pyenv root)/shims:$PATH"
+fi
 
 # Postgres (libpq)
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+if command -v psql &> /dev/null; then
+  export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+fi
 
 
 # ============================================================
@@ -276,3 +280,8 @@ npm()  { _nvm_lazy_load; npm  "$@"; }
 npx()  { _nvm_lazy_load; npx  "$@"; }
 yarn() { _nvm_lazy_load; yarn "$@"; }
 pnpm() { _nvm_lazy_load; pnpm "$@"; }
+
+# ============================================================
+# Docker
+# ============================================================
+export PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin/" Docker
