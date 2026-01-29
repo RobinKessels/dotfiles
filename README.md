@@ -8,6 +8,7 @@ List of tools:
 - [zsh](https://www.zsh.org/): command-line interpreter for shell scripts
 - [Neovim](https://github.com/neovim/neovim): Vim-fork focused on extensibility and usability
 - [Zen Browser](https://zen-browser.app/): Browser with Workspaces, great for keeping tabs organized per project
+
 Purpose:
 
 The main idea behind this setup is to be able to navigate to your most used applications without having to search for them. It is an attempt at a non-cluttered workspace, focused on use for 1 monitor. However it can be adapted for use in a multi-screen setup.
