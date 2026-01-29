@@ -53,4 +53,4 @@ keybind = opt+h=unbind
 keybind = opt+l=unbind
 
 # set opacity
-background-opacity = 0.9
+# background-opacity = 0.9
