@@ -1,1 +1,1 @@
-/config/raycast/raycast.rayconfig filter=git-crypt diff=git-crypt
+config/raycast/raycast.rayconfig filter=git-crypt diff=git-crypt
