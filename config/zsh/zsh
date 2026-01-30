@@ -54,13 +54,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 # ============================================================
 alias ctx="kubie ctx"
 
-# Sentigrate / Wolk
-alias wolkdeploy="cd ~/Sentigrate/wolk/wolk-deployments/deployment-config"
-alias wolkapp="cd ~/Sentigrate/wolk/wolk-app"
-alias harvest-ot="python /Users/robin/Sentigrate/harvest/harvest_timelogs.py"
-
 # Misc
-alias non="cat ~/.non-commands.txt"
 alias pip="pip3"
 alias tf="terraform"
 alias dm="osascript -e 'tell app \"System Events\" to tell appearance preferences to set dark mode to not dark mode'"
