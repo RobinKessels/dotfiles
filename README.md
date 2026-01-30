@@ -30,3 +30,30 @@ Your installed applications will look at ~/.config/ but these files are linked t
 
 Recommended MacOS Settings
 ...
+
+Raycast settings are encrypted
+
+To decrypt files with `git-crypt` using your stored GPG private key:
+
+1. **Import your GPG private key:**
+   - Save your exported key (from Bitwarden) to a file, e.g. `my-gpg-private-key.asc`.
+   - Run:
+
+     ```sh
+     gpg --import my-gpg-private-key.asc
+     ```
+
+2. **Clone your git repo:**
+
+   ```sh
+   git clone git@github.com:RobinKessels/dotfiles.git
+   cd dotfiles
+   ```
+
+3. **Unlock with git-crypt:**
+
+   ```sh
+   git-crypt unlock
+   ```
+
+   If your GPG key is loaded, `git-crypt` will decrypt the files automatically.
