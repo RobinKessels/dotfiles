@@ -12,3 +12,4 @@ brew update
 brew upgrade
 
 # Install packages from Brewfile
+brew bundle
