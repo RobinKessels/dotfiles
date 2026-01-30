@@ -48,7 +48,7 @@ if command -v psql &> /dev/null; then
   export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 fi
 
-
+export XDG_CONFIG_HOME="$HOME/.config"
 # ============================================================
 # Aliases
 # ============================================================
