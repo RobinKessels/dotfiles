@@ -16,9 +16,11 @@ This repo is used to host my dev setup config and contains a list of useful tool
 - [Rectangle](https://rectangleapp.com/): Move and resize windows using keyboard shortcuts
 - [Lazygit](https://github.com/jesseduffield/lazygit): terminal based git ui (there is a plugin for neovim)
 
-Purpose:
+## Purpose
 
-The main idea behind this setup is to be able to navigate to your most used applications without having to search for them. It is an attempt at a non-cluttered workspace, focused on use for 1 monitor. However it can be adapted for use in a multi-screen setup.
+The main idea behind this setup is to be able to navigate to your most used applications without having to search for them. Instead we rely on a combination of keybindings and workspaces for to have applications in fixed place.
+
+It is an attempt at a non-cluttered workspace, focused on use for 1 monitor. However it can be adapted for use in a multi-screen setup.
 
 ## Goal
 
