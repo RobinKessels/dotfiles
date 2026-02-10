@@ -225,25 +225,25 @@ if.app-id = "com.mitchellh.ghostty"
 run = ["move-node-to-workspace T", "workspace T", "layout floating"]
 [[on-window-detected]]
 if.app-id = "org.mozilla.firefox"
-run = ["move-node-to-workspace B", "workspace B"]
+run = ["move-node-to-workspace B", "workspace B", "layout floating"]
 [[on-window-detected]] # Zed
 if.app-id = "dev.zed.Zed"
-run = ["move-node-to-workspace C", "workspace C"]
+run = ["move-node-to-workspace C", "workspace C", "layout floating"]
 [[on-window-detected]] # Zen Browser
 if.app-id = "app.zen-browser.zen"
-run = ["move-node-to-workspace B", "workspace B"]
+run = ["move-node-to-workspace B", "workspace B", "layout floating"]
 [[on-window-detected]] # Visual Studio Code
 if.app-id = "com.microsoft.VSCode"
-run = ["move-node-to-workspace C", "workspace C"]
+run = ["move-node-to-workspace C", "workspace C", "layout floating"]
 [[on-window-detected]] # Slack
 if.app-id = "com.tinyspeck.slackmacgap"
-run = ["move-node-to-workspace S", "workspace S"]
+run = ["move-node-to-workspace S", "workspace S", "layout floating"]
 [[on-window-detected]] # Notion
 if.app-id = "notion.id"
-run = ["move-node-to-workspace N", "workspace N"]
+run = ["move-node-to-workspace N", "workspace N", "layout floating"]
 [[on-window-detected]] # Docker desktop
 if.app-id = "com.electron.dockerdesktop"
-run = ["move-node-to-workspace D", "workspace D"]
+run = ["move-node-to-workspace D", "workspace D", "layout floating"]
 [[on-window-detected]] # 1Password
 if.app-id = "com.1password.1password"
 run = ["move-node-to-workspace 1", "workspace 1", "layout floating"]
@@ -264,7 +264,7 @@ if.app-id = "com.postmanlabs.mac"
 run = ["move-node-to-workspace R", "workspace R", "layout floating"]
 [[on-window-detected]] # ChatGPT
 if.app-id = "com.openai.chat"
-run = ["move-node-to-workspace Q", "workspace Q"]
+run = ["move-node-to-workspace Q", "workspace Q", "layout floating"]
 [[on-window-detected]] # Spotify
 if.app-id = "com.spotify.client"
 run = ["move-node-to-workspace M", "workspace M", "layout floating"]
