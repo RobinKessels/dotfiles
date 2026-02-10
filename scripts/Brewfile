@@ -1,0 +1,139 @@
+tap "azure/azd"
+tap "azure/functions"
+tap "caarlos0/tap"
+tap "felixkratz/formulae"
+tap "homebrew/services"
+tap "mongodb/brew"
+tap "nikitabobko/tap"
+# Library and utilities for processing GIFs
+brew "giflib"
+# New file format for still image compression
+brew "jpeg-xl"
+# Codec library for encoding and decoding AV1 video streams
+brew "aom"
+# FSF/GNU binutils for cross-compiling to arm-linux
+brew "arm-linux-gnueabihf-binutils"
+# GNU compiler collection for arm-none-eabi
+brew "arm-none-eabi-gcc"
+# Azure Storage data transfer utility
+brew "azcopy"
+# Cryptography and SSL/TLS Toolkit
+brew "openssl@3"
+# Microsoft Azure CLI 2.0
+brew "azure-cli"
+# Cross platform file encryption utility using blowfish
+brew "bcrypt"
+# Freely available high-quality data compressor
+brew "bzip2"
+# Vector graphics library with cross-device output support
+brew "cairo"
+# Cross-platform make
+brew "cmake"
+# Dependency manager for Cocoa projects
+brew "cocoapods"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# GitHub command-line tool
+brew "gh"
+# Enable transparent encryption/decryption of files in a git repo
+brew "git-crypt"
+# OpenType text shaping engine
+brew "harfbuzz"
+# Kubernetes package manager
+brew "helm"
+# Convert source code to formatted text with syntax highlighting
+brew "highlight"
+# Improved top (interactive process viewer)
+brew "htop"
+# Update of iperf: measures TCP, UDP, and SCTP bandwidth
+brew "iperf3"
+# Lightweight and flexible command-line JSON processor
+brew "jq"
+# Library for interacting with JSON
+brew "jsoncpp"
+# Kubernetes CLI To Manage Your Clusters In Style!
+brew "k9s"
+# Centralized server for distributed coordination of services
+brew "zookeeper"
+# Open-source distributed event streaming platform
+brew "kafka"
+# Much more powerful alternative to kubectx and kubens
+brew "kubie"
+# Simple terminal UI for git commands
+brew "lazygit"
+# Library for encoding and decoding .avif files
+brew "libavif"
+# Conversion library
+brew "libiconv"
+# Framework for layout and rendering of i18n text
+brew "pango"
+# Library to render SVG files using Cairo
+brew "librsvg"
+# Utility for directing compilation
+brew "make"
+# Java-based project management
+brew "maven"
+# Open-source, cross-platform JavaScript runtime environment
+brew "node"
+# MongoDB Shell to connect, configure, query, and work with your MongoDB database
+brew "mongosh"
+# Message broker implementing the MQTT protocol
+brew "mosquitto"
+# Open source relational database management system
+brew "mysql"
+# Open source relational database management system
+brew "mysql-client"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim", args: ["HEAD"]
+# HTTP/2 C Library
+brew "nghttp2"
+# HTTP(S) server and reverse proxy, and IMAP/POP3 proxy server
+brew "nginx"
+# Port scanning utility for large networks
+brew "nmap"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.10"
+# Platform built on V8 to build network applications
+brew "node@14"
+# Package compiler and linker metadata toolkit
+brew "pkgconf"
+# Python version management
+brew "pyenv"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# Build applications with serverless architectures
+brew "serverless"
+# Non-interactive SSH password auth
+brew "sshpass"
+# Tool to build, change, and version infrastructure
+brew "terraform"
+# Thin wrapper for Terraform e.g. for locking state
+brew "terragrunt"
+# Tools for the WireGuard secure network tunnel
+brew "wireguard-tools"
+# Azure Developer CLI
+brew "azure/azd/azd"
+# Azure Functions Core Tools 4.0
+brew "azure/functions/azure-functions-core-tools@4"
+# Timer is like sleep, but reports progress.
+brew "caarlos0/tap/timer"
+# A window border system for macOS
+brew "felixkratz/formulae/borders"
+# This package contains standard utilities for interacting with MongoDB.
+brew "mongodb/brew/mongodb-database-tools"
+# Command-line interface for 1Password
+cask "1password-cli"
+# AeroSpace is an i3-like tiling window manager for macOS
+cask "nikitabobko/tap/aerospace"
+# Set of tools to manage resources and applications hosted on Google Cloud
+cask "gcloud-cli"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty@tip"
+# Customise mouse behavior
+cask "linearmouse"
+# File system integration
+cask "osxfuse"
+# JDK from the Eclipse Foundation (Adoptium)
+cask "temurin"

@@ -262,3 +262,6 @@ run = ["move-node-to-workspace R", "workspace R", "layout floating"]
 [[on-window-detected]] # ChatGPT
 if.app-id = "com.openai.chat"
 run = ["move-node-to-workspace Q", "workspace Q"]
+[[on-window-detected]] # Spotify
+if.app-id = "com.spotify.client"
+run = ["move-node-to-workspace M", "workspace M", "layout floating"]
