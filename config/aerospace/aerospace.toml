@@ -247,6 +247,9 @@ run = ["move-node-to-workspace D", "workspace D"]
 [[on-window-detected]] # 1Password
 if.app-id = "com.1password.1password"
 run = ["move-node-to-workspace 1", "workspace 1", "layout floating"]
+[[on-window-detected]] # Bitwarden
+if.app-id = "com.bitwarden.desktop"
+run = ["move-node-to-workspace 1", "workspace 1", "layout floating"]
 [[on-window-detected]] # MongoDB Compass
 if.app-id = "com.mongodb.compass"
 run = ["move-node-to-workspace M", "workspace M", "layout floating"]
@@ -265,3 +268,5 @@ run = ["move-node-to-workspace Q", "workspace Q"]
 [[on-window-detected]] # Spotify
 if.app-id = "com.spotify.client"
 run = ["move-node-to-workspace M", "workspace M", "layout floating"]
+[[on-window-detected]]
+run = "layout floating"
